@@ -10,7 +10,7 @@ export default defineConfig({
       remotes: {
         endangeredSpecies: "http://localhost:3000/assets/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: ["react", "react-dom", "react-router-dom"],
     }),
   ],
   build: {
