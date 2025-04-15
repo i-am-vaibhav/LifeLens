@@ -12,8 +12,10 @@ function App() {
   return (
     <Router>
       <Flex direction="column" minH="100vh">
-        <Navbar />
-        <Box flex="1">
+        <Box position="fixed" top="0" left="0" right="0" zIndex="1000">
+          <Navbar />
+        </Box>
+        <Box flex="1" mt="60px" mb="60px" p={4}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -27,7 +29,9 @@ function App() {
             />
           </Routes>
         </Box>
-        <Footer />
+        <Box position="fixed" bottom="0" left="0" right="0" zIndex="1000">
+          <Footer />
+        </Box>
       </Flex>
     </Router>
   );

@@ -9,7 +9,7 @@ interface ModularCardProps {
 }
 
 const ModularCard = ({ imageSrc, title, description, route }: ModularCardProps) => (
-  <Card.Root flexDirection="row" overflow="hidden" maxW="xl">
+  <Card.Root flexDirection="row" overflow="hidden" maxW="xl" margin={4}>
     <Image
       objectFit="cover"
       maxW="200px"
@@ -18,8 +18,8 @@ const ModularCard = ({ imageSrc, title, description, route }: ModularCardProps) 
     />
     <Box>
       <Card.Body>
-        <Card.Title mb="2">{title}</Card.Title>
-        <Card.Description>{description}</Card.Description>
+        <Card.Title whiteSpace="normal" wordBreak="break-word" mb="2">{title}</Card.Title>
+        <Card.Description whiteSpace="normal" wordBreak="break-word">{description}</Card.Description>
       </Card.Body>
       <Card.Footer>
         <Button asChild>
