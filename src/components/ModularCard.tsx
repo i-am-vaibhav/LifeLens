@@ -9,7 +9,7 @@ interface ModularCardProps {
 }
 
 const ModularCard = ({ imageSrc, title, description, route }: ModularCardProps) => (
-  <Card.Root flexDirection="row" overflow="hidden" maxW="xl" margin={4}>
+  <Card.Root flexDirection="row" overflow="hidden" maxW="xl" margin={4} shadow={"lg"}>
     <Image
       objectFit="cover"
       maxW="200px"

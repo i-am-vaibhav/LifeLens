@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <Box bg="teal.500" px={4} py={2}>
+    <Box bg="teal.500" px={4} py={2} shadow={["inner"]}>
       <Flex alignItems="center" justifyContent="space-between">
         {/* App/Brand Title */}
         <Heading as="h1" size="lg" color="white">
