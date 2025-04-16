@@ -10,7 +10,32 @@ export default defineConfig({
       remotes: {
         endangeredSpecies: "http://localhost:3000/assets/remoteEntry.js",
       },
-      shared: ["react", "react-dom"],
+      shared: {
+        "react": {
+          singleton: true,
+          requiredVersion: "^19.0.0",
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: "^19.0.0",
+        },
+        "@chakra-ui/react": {
+          singleton: true,
+          requiredVersion: "^3.16.0", // adjust as per your installed version
+        },
+        "@emotion/react": {
+          singleton: true,
+          requiredVersion: "^11.14.0",
+        },
+        "@emotion/styled": {
+          singleton: true,
+          requiredVersion: "^11.14.0",
+        },
+        "framer-motion": {
+          singleton: true,
+          requiredVersion: "^12.7.3",
+        },
+      },      
     }),
   ],
   build: {

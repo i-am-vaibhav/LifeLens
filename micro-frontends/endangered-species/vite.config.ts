@@ -10,9 +10,38 @@ export default defineConfig({
       name: "endangeredSpecies",
       filename: "remoteEntry.js",
       exposes: {
-        "./EndangeredSpecies": "./src/components/EndangeredSpecies.tsx",
+        "./Dashboard": "./src/components/Dashboard.tsx",
       },
-      shared: ["react", "react-dom", "jotai"],
+      shared: {
+        "react": {
+          singleton: true,
+          requiredVersion: "^19.0.0",
+        },
+        "react-dom": {
+          singleton: true,
+          requiredVersion: "^19.0.0",
+        },
+        "jotai": {
+          singleton: true,
+          requiredVersion: "^2.12.3",
+        },
+        "@chakra-ui/react": {
+          singleton: true,
+          requiredVersion: "^3.16.0", // adjust as per your installed version
+        },
+        "@emotion/react": {
+          singleton: true,
+          requiredVersion: "^11.14.0",
+        },
+        "@emotion/styled": {
+          singleton: true,
+          requiredVersion: "^11.14.0",
+        },
+        "framer-motion": {
+          singleton: true,
+          requiredVersion: "^12.7.3",
+        },
+      }, 
     }),
   ],
   build: {
