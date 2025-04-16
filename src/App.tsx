@@ -6,7 +6,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Footer from './components/Footer.tsx';
 
-const EndangeredSpecies = React.lazy(() => import("endangeredSpecies/EndangeredSpecies"));
+const EndangeredSpeciesDashboard = React.lazy(() => import("endangeredSpecies/Dashboard"));
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Box position="fixed" top="0" left="0" right="0" zIndex="1000">
           <Navbar />
         </Box>
-        <Box flex="1" mt="60px" mb="60px" p={4}>
+        <Box flex="1" mt="50px" mb="85px" p={4}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -23,7 +23,7 @@ function App() {
               path="/endangered-species"
               element={
                 <Suspense fallback={<div>Loading...</div>}>
-                  <EndangeredSpecies />
+                  <EndangeredSpeciesDashboard />
                 </Suspense>
               }
             />

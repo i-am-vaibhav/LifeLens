@@ -1,11 +1,11 @@
 import './App.css'
-import EndangeredSpecies from './components/EndangeredSpecies.tsx'
+import Dashboard from './components/Dashboard.tsx'
 
 function App() {
 
   return (
     <>
-      <EndangeredSpecies/>
+      <Dashboard/>
     </>
   )
 }
