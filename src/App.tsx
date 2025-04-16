@@ -1,21 +1,41 @@
-import { Suspense } from 'react';
-import React from 'react';
-import './App.css';
+import React, { Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Box, Flex } from '@chakra-ui/react';
+import Navbar from './components/NavBar.tsx';
+import Home from './components/Home';
+import About from './components/About';
+import Footer from './components/Footer.tsx';
 
-
-const RemoteSpecies = React.lazy(() => import("endangeredSpecies/EndangeredSpecies"));
-
+const EndangeredSpecies = React.lazy(() => import("endangeredSpecies/EndangeredSpecies"));
 
 function App() {
-
   return (
-    <>
-      <h1>LifeLens</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <RemoteSpecies/>
-      </Suspense>
-    </>
-  )
+    <Router>
+      <Flex direction="column" minH="100vh">
+        <Box position="fixed" top="0" left="0" right="0" zIndex="1000">
+          <Navbar />
+        </Box>
+        <Box flex="1" mt="60px" mb="60px" p={4}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/endangered-species"
+              element={
+                <Suspense fallback={<div>Loading...</div>}>
+                  <EndangeredSpecies />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </Box>
+        <Box position="fixed" bottom="0" left="0" right="0" zIndex="1000">
+          <Footer />
+        </Box>
+      </Flex>
+    </Router>
+  );
 }
 
-export default App
+export default App;
+
