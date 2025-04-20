@@ -57,23 +57,26 @@ npm run build
 npm run preview
 ```
 
-```
-
 ## Usage
-1. Open your browser and navigate to:
-```
 
+1. Open your browser and navigate to:
+
+```
 http://localhost:5173
 
-````
+```
 
 ## Contributing
+
 Contributions are welcome! To contribute:
+
 1. Fork the repository.
+
 2. Create a new branch:
+
 ```bash
 git checkout -b feature-name
-````
+```
 
 3. Commit your changes:
 
