@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, HStack, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import { ColorModeButton } from './ui/color-mode';
 
 const Navbar = () => {
   return (
@@ -33,6 +34,7 @@ const Navbar = () => {
           >
             About
           </Link>
+          <ColorModeButton />
         </HStack>
       </Flex>
     </Box>

@@ -17,6 +17,10 @@ export default defineConfig({
           singleton: true,
           requiredVersion: "^19.0.0",
         },
+        "react-icons": {
+          singleton: true,
+          requiredVersion: "^5.5.0",
+        },
         "react-dom": {
           singleton: true,
           requiredVersion: "^19.0.0",
@@ -27,7 +31,7 @@ export default defineConfig({
         },
         "@chakra-ui/react": {
           singleton: true,
-          requiredVersion: "^3.16.0", // adjust as per your installed version
+          requiredVersion: "^3.16.0",
         },
         "@emotion/react": {
           singleton: true,

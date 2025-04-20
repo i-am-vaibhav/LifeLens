@@ -45,6 +45,7 @@ const TopSpeciesChart: React.FC<TopSpeciesChartProps> = ({ onBarClick }) => {
             order: 'desc',
             verifiable: true,
             quality_grade: 'research',
+            csi: 'EN',
           },
         });
 
