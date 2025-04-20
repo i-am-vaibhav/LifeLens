@@ -43,11 +43,13 @@ const ObservationTrends: React.FC = () => {
               per_page: 200,
               order_by: "observed_on",
               order: "desc",
+              csi: "EN",
             },
           }
         );
 
         const observations = response.data.results;
+
         const monthlyCounts = Array(12).fill(0);
 
         observations.forEach((obs: any) => {
