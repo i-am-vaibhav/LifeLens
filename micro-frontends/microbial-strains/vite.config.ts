@@ -4,6 +4,15 @@ import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
 
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://rest.pubmlst.org',  // The backend API server
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   plugins: [
     react(),
     federation({
@@ -44,10 +53,6 @@ export default defineConfig({
         "framer-motion": {
           singleton: true,
           requiredVersion: "^12.7.3",
-        },
-        "http-proxy-middleware": {
-          singleton: true,
-          requiredVersion: "^3.0.5",
         },
       }, 
     }),

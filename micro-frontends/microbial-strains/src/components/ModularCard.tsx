@@ -1,51 +1,29 @@
-import { Box, Button, Card, Image } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Box, Button, Text } from "@chakra-ui/react";
 
 interface ModularCardProps {
-  imageSrc: string;
-  title: string;
-  description: string;
-  route?: string;
-  href?: string;
+  title: number;
+  onClick: () => void;
 }
 
-const ModularCard = ({
-  imageSrc,
-  title,
-  description,
-  route,
-  href,
-}: ModularCardProps) => (
-  <Card.Root
-    flexDirection="row"
-    overflow="hidden"
+const ModularCard = ({ title, onClick }: ModularCardProps) => (
+  <Box
     maxW="xl"
     margin={4}
-    shadow={"lg"}
+    shadow="lg"
+    borderRadius="md"
+    overflow="hidden"
+    borderWidth="1px"
+    p={4}
+    textAlign="center"
   >
-    <Image objectFit="cover" maxW="200px" src={imageSrc} alt="Alternate Text" />
-    <Box>
-      <Card.Body>
-        <Card.Title whiteSpace="normal" wordBreak="break-word" mb="2">
-          {title}
-        </Card.Title>
-        <Card.Description whiteSpace="pre-wrap" wordBreak="break-word">
-          {description}
-        </Card.Description>
-      </Card.Body>
-      <Card.Footer>
-        {route ? (
-          <Button asChild>
-            <Link to={route}>Explore</Link>
-          </Button>
-        ) : (
-          <Button as="a" href={href} target="_blank" rel="noopener noreferrer">
-            Explore
-          </Button>
-        )}
-      </Card.Footer>
-    </Box>
-  </Card.Root>
+    <Text fontSize="xl" fontWeight="bold" mb={4}>
+      {title}
+    </Text>
+
+    <Button colorScheme="blue" onClick={onClick}>
+      View
+    </Button>
+  </Box>
 );
 
 export default ModularCard;

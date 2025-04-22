@@ -6,62 +6,62 @@ import {
   Text,
   Button,
   Flex,
-  SimpleGrid,
   VStack,
   Heading,
+  Grid,
 } from "@chakra-ui/react";
 import { FiSearch } from "react-icons/fi";
-import ModularCard from "./ModularCard";
-import pubmlst from "../pubmlst.js";
+import pubmlst from "../pubmlst.ts";
+import MicrobialCard from "./MicrobialCard.tsx";
+import { IsolateData } from "../IsolateSchema.ts";
+import ModularCard from "./ModularCard.tsx";
 
-interface Database {
-  db: string;
+interface DatabaseItem {
   description?: string;
+  name: string;
+  databases?: {
+    href: string;
+    description: string;
+    name: string;
+  }[];
 }
 
-interface Strain {
-  id: string;
-  ST?: string;
-  species?: string;
-  image_url?: string;
-}
 
 const ITEMS_PER_PAGE = 10;
 
 export default function MicrobialStrainBrowser() {
-  const [databases, setDatabases] = useState<Database[]>([]);
-  const [selectedDb, setSelectedDb] = useState<string>("");
-  const [strains, setStrains] = useState<Strain[]>([]);
+  const [databaseGroups, setDatabaseGroups] = useState<DatabaseItem[]>([]);
+  const [selectedDbName, setSelectedDbName] = useState<string>("");
+  const [selectedDbId, setSelectedDbId] = useState<string>("");
+  const [strains, setStrains] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
-
-  // Dropdown search state
   const [localSearchTerm, setLocalSearchTerm] = useState<string>("");
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [selectedIsolate, setSelectedIsolate] = useState<IsolateData | null>(null);
+
   const inputWrapperRef = useRef<HTMLDivElement>(null);
 
-  // Fetch available databases
   useEffect(() => {
     const fetchDatabases = async () => {
       try {
         const res = await pubmlst.get(`/db`);
-        setDatabases(Array.isArray(res.data) ? res.data : []);
+        setDatabaseGroups(Array.isArray(res.data) ? res.data : []);
       } catch (err) {
         console.error("Error fetching databases:", err);
-        setDatabases([]);
       }
     };
     fetchDatabases();
   }, []);
 
-  // Fetch strains when a database is selected or page changes
   useEffect(() => {
-    if (!selectedDb) return;
+    if (!selectedDbId) return;
+
     const fetchStrains = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(
-          `${API_BASE}/db/${selectedDb}/isolates?limit=${ITEMS_PER_PAGE}&offset=${(page - 1) * ITEMS_PER_PAGE}`
+        const res = await pubmlst.get(
+          `/db/${selectedDbId}/isolates?page_size=${ITEMS_PER_PAGE}&offset=${(page - 1) * ITEMS_PER_PAGE}`
         );
         setStrains(res.data.isolates || []);
       } catch (err) {
@@ -71,20 +71,52 @@ export default function MicrobialStrainBrowser() {
         setLoading(false);
       }
     };
+
     fetchStrains();
-  }, [selectedDb, page]);
+  }, [selectedDbId, page]);
 
-  // Filter dropdown suggestions
-  const suggestions = databases.filter((db) =>
-    (db.description || db.db).toLowerCase().includes(localSearchTerm.toLowerCase())
-  );
+  const fetchStrainDetails = async (strain: string , index: number) => {
+    try { // Get the URL from the strain object using the index
+    
+      if (strain) {
+        // Split the URL at "db"
+        const urlParts = strain.split('/db/');
+        const res = await pubmlst.get(`/db/${urlParts[1]}`);
+        setSelectedIsolate(res.data);
+      } else {
+        console.error("Strain URL not found for index:", index);  
+      }
+    } catch (error) {
+      console.error("Failed to fetch isolate details", error);
+    }
+  };
 
-  // Handle click on suggestion
+  const suggestions = databaseGroups.reduce<
+    { label: string; id: string }[]
+  >((acc, group) => {
+    if (group.databases) {
+      group.databases.forEach((db) => {
+        if (
+          db.description.toLowerCase().includes(localSearchTerm.toLowerCase())
+        ) {
+          acc.push({ label: db.description, id: db.name });
+        }
+      });
+    } else if (
+      group.description?.toLowerCase().includes(localSearchTerm.toLowerCase())
+    ) {
+      acc.push({ label: group.description, id: group.name });
+    }
+    return acc;
+  }, []);
+
   const handleSuggestionClick = (label: string, id: string) => {
     setLocalSearchTerm(label);
     setShowDropdown(false);
-    setSelectedDb(id);
+    setSelectedDbName(label);
+    setSelectedDbId(id);
     setPage(1);
+    setSelectedIsolate(null);
   };
 
   return (
@@ -148,14 +180,14 @@ export default function MicrobialStrainBrowser() {
                 boxShadow="xl"
               >
                 {suggestions.length > 0 ? (
-                  suggestions.map((db) => (
+                  suggestions.map((suggestion) => (
                     <Box
-                      key={db.db}
+                      key={suggestion.id}
                       p={3}
                       _hover={{ bg: "gray.100", cursor: "pointer" }}
-                      onClick={() => handleSuggestionClick(db.description || db.db, db.db)}
+                      onClick={() => handleSuggestionClick(suggestion.label, suggestion.id)}
                     >
-                      <Text fontWeight="semibold">{db.description || db.db}</Text>
+                      <Text fontWeight="semibold">{suggestion.label}</Text>
                     </Box>
                   ))
                 ) : (
@@ -177,30 +209,39 @@ export default function MicrobialStrainBrowser() {
         <>
           {strains.length > 0 ? (
             <>
-              <SimpleGrid columns={[1, 2, 2]} spacing={4}>
-                {strains.map((strain) => (
+              <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+                {strains.map((strain, index) => (
                   <ModularCard
-                    key={strain.id}
-                    imageSrc={strain.image_url || "/placeholder.png"}
-                    title={`Strain ID: ${strain.id}`}
-                    description={`ST: ${strain.ST || "N/A"}\nSpecies: ${strain.species || "Unknown"}`}
-                    href={`${API_BASE}/db/${selectedDb}/isolate/${strain.id}`}
+                    key={index}
+                    title={index + 1}
+                    onClick={() => {
+                      fetchStrainDetails(strain, index + 1);
+                    }}
                   />
                 ))}
-              </SimpleGrid>
+              </Grid>
+
+              {selectedIsolate && (
+                <Box mt={6}>
+                  <MicrobialCard isolate={selectedIsolate} />
+                </Box>
+              )}
 
               <Flex mt={6} justify="space-between">
                 <Button onClick={() => setPage((p) => Math.max(p - 1, 1))} isDisabled={page === 1}>
                   Previous
                 </Button>
                 <Text>Page {page}</Text>
-                <Button onClick={() => setPage((p) => p + 1)} isDisabled={strains.length < ITEMS_PER_PAGE}>
+                <Button
+                  onClick={() => setPage((p) => p + 1)}
+                  isDisabled={strains.length < ITEMS_PER_PAGE}
+                >
                   Next
                 </Button>
               </Flex>
             </>
-          ) : selectedDb ? (
-            <Text>No strains found for this database.</Text>
+          ) : selectedDbId ? (
+            <Text>No strains found for the database "{selectedDbName}".</Text>
           ) : null}
         </>
       )}
