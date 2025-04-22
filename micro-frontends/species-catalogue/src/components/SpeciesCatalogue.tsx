@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import ModularCard from "../../../../src/components/ModularCard";
+import ModularCard from "../components/ModularCard";
 import picture from "../assets/speciesCatalog.jpeg";
 import animalsListTemp from "../assets/animalList.json";
 

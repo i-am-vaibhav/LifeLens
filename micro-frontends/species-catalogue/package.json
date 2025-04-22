@@ -11,6 +11,8 @@
     "preview": "vite preview --port 3000 --strictPort"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.16.1",
+    "@emotion/react": "^11.14.0",
     "@originjs/vite-plugin-federation": "^1.4.1",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",

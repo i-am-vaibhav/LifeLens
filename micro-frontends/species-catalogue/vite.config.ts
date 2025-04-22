@@ -1,4 +1,3 @@
-
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
@@ -10,10 +9,14 @@ export default defineConfig({
       name: "speciesCatalogue",
       filename: "remoteEntry.js",
       exposes: {
-        "/SpeciesCatalogue": "./src/components/SpeciesCatalogue.tsx",
+        "./SpeciesCatalogue": "./src/components/SpeciesCatalogue.tsx", 
       },
       shared: {
-        "react": {
+        react: {
+          singleton: true,
+          requiredVersion: "^19.0.0",
+        },
+        "react-dom": {
           singleton: true,
           requiredVersion: "^19.0.0",
         },
@@ -21,11 +24,7 @@ export default defineConfig({
           singleton: true,
           requiredVersion: "^5.5.0",
         },
-        "react-dom": {
-          singleton: true,
-          requiredVersion: "^19.0.0",
-        },
-        "jotai": {
+        jotai: {
           singleton: true,
           requiredVersion: "^2.12.3",
         },
