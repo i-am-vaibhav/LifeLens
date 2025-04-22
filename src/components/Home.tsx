@@ -2,6 +2,7 @@ import { Box, Flex, Heading } from "@chakra-ui/react"
 import ModularCard from "./ModularCard"
 import endangeredSpeciesImage from "../assets/endangeredSpecies.jpeg"
 import speciesCatalogue from "../assets/speciesCatalog.jpeg"
+import microbialStrain from "../assets/Microbial-Strain.png";
 
 const Home = () => {
   return <>
@@ -17,7 +18,7 @@ const Home = () => {
             route="/endangered-species"
           />
           <ModularCard
-            imageSrc={endangeredSpeciesImage}
+            imageSrc={microbialStrain}
             title="Microbial Strains"
             description="Discover the fascinating world of microbes and their crucial ecological role."
           />
