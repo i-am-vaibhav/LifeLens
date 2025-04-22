@@ -8,6 +8,7 @@ import Footer from './components/Footer.tsx';
 import { LifeLensSpinner } from './components/LifeLensSpinner.tsx';
 
 const EndangeredSpeciesDashboard = React.lazy(() => import("endangeredSpecies/Dashboard"));
+const SpeciesCatalogue = React.lazy(() => import("speciesCatalogue/SpeciesCatalogue"));
 
 function App() {
   return (
@@ -25,6 +26,14 @@ function App() {
               element={
                 <Suspense fallback={<LifeLensSpinner />}>
                   <EndangeredSpeciesDashboard />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/species-catalogue"
+              element={
+                <Suspense fallback={<LifeLensSpinner />}>
+                  <SpeciesCatalogue />
                 </Suspense>
               }
             />
