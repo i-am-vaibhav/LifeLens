@@ -11,6 +11,9 @@ export default defineConfig({
       exposes: {
         "./SpeciesCatalogue": "./src/components/SpeciesCatalogue.tsx", 
       },
+      remotes: {
+        endangeredSpecies: "http://localhost:3000/assets/remoteEntry.js",
+      },
       shared: {
         react: {
           singleton: true,
