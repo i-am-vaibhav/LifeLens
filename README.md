@@ -7,8 +7,9 @@ LifeLens is an innovative application designed to provide users with data and in
 1. [Features](#features)
 2. [Installation](#installation)
 3. [Usage](#usage)
-4. [Contributing](#contributing)
-5. [License](#license)
+4. [Demo](#demo)
+5. [Contributing](#contributing)
+6. [License](#license)
 
 ## Features
 
@@ -55,6 +56,11 @@ cd micro-frontends/endangered-species
 npm install
 npm run build
 npm run preview
+
+cd micro-frontends/species-catalogue
+npm install
+npm run build
+npm run preview
 ```
 
 ## Usage
@@ -66,6 +72,9 @@ http://localhost:5173
 
 ```
 
+## Demo
+Watch our demo video to see LifeLens in action:
+[Click here to view the LifeLens Demo](https://github.com/i-am-vaibhav/LifeLens/blob/main/src/assets/demo-video/demo.mp4)
 ## Contributing
 
 Contributions are welcome! To contribute:
@@ -94,4 +103,4 @@ git push origin feature-name
 
 ## License
 
-This project is licensed under the [Insert License Name, e.g., MIT License]. See the [LICENSE](./LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
