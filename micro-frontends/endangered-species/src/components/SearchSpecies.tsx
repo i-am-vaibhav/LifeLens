@@ -21,6 +21,7 @@ interface Suggestion {
     name: string;
     preferred_common_name?: string;
     iconic_taxon_name?: string;
+    conservation_status?: { status: string };
   };
 }
 
@@ -92,9 +93,11 @@ const SearchSpecies: React.FC<SearchSpeciesProps> = ({ setSearchTerm }) => {
   };
 
   return (
-    <Box p={4} m={1} mt={10} maxW="6xl"  borderWidth={1} borderRadius="lg" boxShadow="md">
-      <VStack spacing={4} width={'5xl'} align="stretch">
-        <Heading size="md">Search Species</Heading>
+    <Box px={{ base: 2, md: 4 }} py={4} borderWidth={1} borderRadius="lg" boxShadow="md" w="full">
+      <VStack spacing={4} align="stretch">
+        <Heading size="md" textAlign="left">
+          Search Species
+        </Heading>
 
         <Box position="relative" ref={inputWrapperRef}>
           <Input
@@ -102,8 +105,8 @@ const SearchSpecies: React.FC<SearchSpeciesProps> = ({ setSearchTerm }) => {
             value={localSearchTerm}
             onChange={(e) => setLocalSearchTerm(e.target.value)}
             onFocus={() => localSearchTerm && setShowDropdown(true)}
-            pr="3rem"
             pl="2.5rem"
+            pr="3rem"
             py={2}
             borderRadius="full"
             borderColor="gray.300"
@@ -111,7 +114,6 @@ const SearchSpecies: React.FC<SearchSpeciesProps> = ({ setSearchTerm }) => {
               borderColor: "blue.400",
               boxShadow: "0 0 0 2px rgba(66, 153, 225, 0.6)",
             }}
-            width="100%"
           />
           <Box position="absolute" left="12px" top="50%" transform="translateY(-50%)" color="gray.500">
             <FiSearch />
@@ -136,23 +138,23 @@ const SearchSpecies: React.FC<SearchSpeciesProps> = ({ setSearchTerm }) => {
               borderWidth="1px"
               borderRadius="lg"
               mt={2}
-              width="100%"
-              maxHeight="240px"
+              w="full"
+              maxH="240px"
               overflowY="auto"
               boxShadow="xl"
-              animation="fadeIn 0.2s ease-in-out"
             >
               {suggestions.length > 0 ? (
                 suggestions.map((s) => (
                   <Box
                     key={s.id}
                     p={3}
-                    transition="background 0.2s"
                     _hover={{ bg: "gray.100", cursor: "pointer" }}
                     onClick={() => handleSuggestionClick(s.record.name)}
                   >
                     {s.record.preferred_common_name && (
-                      <Text fontWeight="semibold">{s.record.preferred_common_name}</Text>
+                      <Text fontWeight="semibold">
+                        {s.record.preferred_common_name}
+                      </Text>
                     )}
                     <Text fontStyle="italic" color="gray.600" fontSize="sm">
                       {s.record.name}
