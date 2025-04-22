@@ -1,21 +1,23 @@
 {
-  "name": "endangered-species",
+  "name": "species-catalogue",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "Endangered Species Micro Frontend",
+  "description": "Species Catalogue Micro Frontend",
   "scripts": {
-    "dev": "vite --port 3000 --strictPort",
+    "dev": "vite --port 3001 --strictPort",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --port 3000 --strictPort"
+    "preview": "vite preview --port 3001 --strictPort"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.16.1",
     "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "@originjs/vite-plugin-federation": "^1.4.1",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
+    "framer-motion": "^12.7.4",
     "jotai": "^2.12.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
