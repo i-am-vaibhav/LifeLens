@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "description": "Microbial Strains Micro Frontend",
+  "proxy": "https://rest.pubmlst.org",
   "scripts": {
     "dev": "vite --port 3002 --strictPort",
     "build": "tsc && vite build",
@@ -18,6 +19,7 @@
     "axios": "^1.8.4",
     "chart.js": "^4.4.9",
     "framer-motion": "^12.7.3",
+    "http-proxy-middleware": "^3.0.5",
     "jotai": "^2.12.3",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",

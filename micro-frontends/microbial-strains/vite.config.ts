@@ -10,7 +10,7 @@ export default defineConfig({
       name: "microbialStrains",
       filename: "remoteEntry.js",
       exposes: {
-        "./MicrobialStrains": "./src/components/Dashboard.tsx",
+        "./MicrobialStrains": "./src/components/MicrobialStrains.tsx",
       },
       shared: {
         "react": {
@@ -44,6 +44,10 @@ export default defineConfig({
         "framer-motion": {
           singleton: true,
           requiredVersion: "^12.7.3",
+        },
+        "http-proxy-middleware": {
+          singleton: true,
+          requiredVersion: "^3.0.5",
         },
       }, 
     }),

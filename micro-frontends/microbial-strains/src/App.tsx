@@ -1,6 +1,5 @@
 import "./App.css";
-import "./components/MicrobialStrains";
-import MicrobialStrains from "./components/MicrobialStrains";
+import MicrobialStrains from "./components/MicrobialStrains.tsx";
 
 function App() {
   return (
