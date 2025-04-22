@@ -1,11 +1,12 @@
-import { Box, Flex, Heading } from "@chakra-ui/react"
-import ModularCard from "./ModularCard"
-import endangeredSpeciesImage from "../assets/endangeredSpecies.jpeg"
-import speciesCatalogue from "../assets/speciesCatalog.jpeg"
-import microbialStrain from "../assets/Microbial-Strain.png";
+import { Box, Flex, Heading } from "@chakra-ui/react";
+import ModularCard from "./ModularCard";
+import endangeredSpeciesImage from "../assets/endangeredSpecies.jpeg";
+import speciesCatalogue from "../assets/speciesCatalog.jpeg";
+// import microbialStrain from "../assets/Microbial-Strain.png";
 
 const Home = () => {
-  return <>
+  return (
+    <>
       <Box p={8}>
         <Heading as="h2" textAlign="center" mb={8} fontSize="4xl">
           Welcome to LifeLens
@@ -17,11 +18,11 @@ const Home = () => {
             description="Learn about species that are at risk of extinction and the efforts to protect them."
             route="/endangered-species"
           />
-          <ModularCard
+          {/* <ModularCard
             imageSrc={microbialStrain}
             title="Microbial Strains"
             description="Discover the fascinating world of microbes and their crucial ecological role."
-          />
+          /> */}
           <ModularCard
             imageSrc={speciesCatalogue}
             title="Species Catalog"
@@ -30,7 +31,8 @@ const Home = () => {
           />
         </Flex>
       </Box>
-  </>
-}
+    </>
+  );
+};
 
 export default Home;
